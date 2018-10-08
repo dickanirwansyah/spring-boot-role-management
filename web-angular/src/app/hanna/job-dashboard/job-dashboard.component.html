@@ -1,0 +1,258 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['Job Dashboard']" icon="tasks" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12">
+                <!-- new widget -->
+                <div class="jarviswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false"
+                    data-widget-colorbutton="false" data-widget-deletebutton="false">
+
+                    <header>
+                        <span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+                        <h2>Dashboard </h2>
+
+                        <ul class="nav nav-tabs pull-right in" id="myTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#s1"><i class="fa fa-clock-o"></i> <span class="hidden-mobile hidden-tablet">Data Individual</span></a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#s2"><i class="fa fa-facebook"></i> <span class="hidden-mobile hidden-tablet">Job Management</span></a>
+                            </li>
+                        </ul>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div class="no-padding">
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+
+                            test
+                        </div>
+                        <!-- end widget edit box -->
+
+                        <div class="widget-body">
+                            <!-- content -->
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade active in padding-10 no-padding-bottom" id="s1">
+                                    <!-- grafik ketiga -->
+                                    <form class="smart-form">
+                                        <!--<header>
+                                            Data Individual
+                                        </header>-->
+                                        <fieldset>
+                                            <div class="row">
+                                                <section>
+                                                    <div class="row">
+                                                        <label class="col col-1.5">Search By</label>
+                                                        <div class="col col-1 input-group">
+                                                            <label class="radio">
+																<input type="radio" name="radio-inline3" checked="checked" value="0" (click)="search($event)">
+																<i></i>Days
+															</label>
+                                                        </div>
+                                                        <div class="col col-1 input-group">
+                                                            <label class="radio">
+																<input type="radio" name="radio-inline3" value="1" (click)="search($event)">
+																<i></i>Month
+															</label>
+                                                        </div>
+                                                        <div class="col col-1 input-group">
+                                                            <label class="radio">
+																<input type="radio" name="radio-inline3" value="2" (click)="search($event)">
+																<i></i>Year
+															</label>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                                <!--<section class="col col-2">
+                                                    <label class="select">
+                                                        <select name="month">
+                                                            <option value="0" selected="" disabled="">Month</option>
+                                                            <option value="1">January</option>
+                                                            <option value="1">February</option>
+                                                            <option value="3">March</option>
+                                                            <option value="4">April</option>
+                                                            <option value="5">May</option>
+                                                            <option value="6">June</option>
+                                                            <option value="7">July</option>
+                                                            <option value="8">August</option>
+                                                            <option value="9">September</option>
+                                                            <option value="10">October</option>
+                                                            <option value="11">November</option>
+                                                            <option value="12">December</option>
+                                                        </select> <i></i> 
+                                                    </label>
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="input">
+                                                        <input type="text" name="year" placeholder="Year" data-mask="2099">
+                                                    </label>
+                                                </section>
+                                                <section class="col col">
+                                                    <label> s.d </label>
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="select">
+                                                        <select name="month">
+                                                            <option value="0" selected="" disabled="">Month</option>
+                                                            <option value="1">January</option>
+                                                            <option value="1">February</option>
+                                                            <option value="3">March</option>
+                                                            <option value="4">April</option>
+                                                            <option value="5">May</option>
+                                                            <option value="6">June</option>
+                                                            <option value="7">July</option>
+                                                            <option value="8">August</option>
+                                                            <option value="9">September</option>
+                                                            <option value="10">October</option>
+                                                            <option value="11">November</option>
+                                                            <option value="12">December</option>
+                                                        </select> <i></i> 
+                                                    </label>
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="input">
+                                                        <input type="text" name="year" placeholder="Year" data-mask="2099">
+                                                    </label>
+                                                </section>-->
+                                                <!--<section class="col col-2">
+                                                    <a class="btn btn-primary btn-sm">Search</a>
+                                                </section>-->
+                                            </div>
+                                            <!--<div class="row">
+                                                <section class="col col-5">
+                                                    * maximal range pencarian adalah 7 bulan
+                                                </section>
+                                            </div>-->
+                                        </fieldset>
+                                    </form>
+
+                                    <div class="padding-10">
+                                        <canvas #barIndividu width="400px" height="200px"></canvas>
+                                        <!--<sa-flot-chart class="chart-large has-legend-unique" [data]="revenueData" [options]="revenueChartOptions"></sa-flot-chart>-->
+                                    </div>
+                                </div>
+                                <!-- end s1 tab pane -->
+
+                                <div class="tab-pane fade in padding-10 no-padding-bottom" id="s2">
+                                    <!-- grafik ketiga -->
+                                    <form class="smart-form">
+                                        <fieldset>
+                                            <div class="row">
+                                                <section>
+                                                    <div class="row">
+                                                        <label class="col col-1.5">Search By</label>
+                                                        <div class="col col-1 input-group">
+                                                            <label class="radio">
+																<input type="radio" name="radio-inline4" checked="checked" value="0" (click)="searchBatch($event)">
+																<i></i>Days
+															</label>
+                                                        </div>
+                                                        <div class="col col-1 input-group">
+                                                            <label class="radio">
+																<input type="radio" name="radio-inline4" value="1" (click)="searchBatch($event)">
+																<i></i>Month
+															</label>
+                                                        </div>
+                                                        <div class="col col-1 input-group">
+                                                            <label class="radio">
+																<input type="radio" name="radio-inline4" value="2" (click)="searchBatch($event)">
+																<i></i>Year
+															</label>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                                <!--<section class="col col-2">
+                                                    <label class="select">
+                                                        <select name="month">
+                                                            <option value="0" selected="" disabled="">Month</option>
+                                                            <option value="1">January</option>
+                                                            <option value="1">February</option>
+                                                            <option value="3">March</option>
+                                                            <option value="4">April</option>
+                                                            <option value="5">May</option>
+                                                            <option value="6">June</option>
+                                                            <option value="7">July</option>
+                                                            <option value="8">August</option>
+                                                            <option value="9">September</option>
+                                                            <option value="10">October</option>
+                                                            <option value="11">November</option>
+                                                            <option value="12">December</option>
+                                                        </select> <i></i> 
+                                                    </label>
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="input">
+                                                        <input type="text" name="year" placeholder="Year" data-mask="2099">
+                                                    </label>
+                                                </section>
+                                                <section class="col col">
+                                                    <label> s.d </label>
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="select">
+                                                        <select name="month">
+                                                            <option value="00" selected="" disabled="">Month</option>
+                                                            <option value="01">January</option>
+                                                            <option value="02">February</option>
+                                                            <option value="03">March</option>
+                                                            <option value="04">April</option>
+                                                            <option value="05">May</option>
+                                                            <option value="06">June</option>
+                                                            <option value="07">July</option>
+                                                            <option value="08">August</option>
+                                                            <option value="09">September</option>
+                                                            <option value="10">October</option>
+                                                            <option value="11">November</option>
+                                                            <option value="12">December</option>
+                                                        </select> <i></i> 
+                                                    </label>
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="input">
+                                                        <input type="text" name="year" placeholder="Year" data-mask="2099">
+                                                    </label>
+                                                </section>
+                                                <section class="col col-2">
+                                                    <a class="btn btn-primary btn-sm">Search</a>
+                                                </section>-->
+                                            </div>
+                                            <!--<div class="row">
+                                                <section class="col col-5">
+                                                    * maximal range pencarian adalah 7 bulan
+                                                </section>
+                                            </div>-->
+                                        </fieldset>
+                                    </form>
+
+                                    <div class="padding-10">
+                                        <canvas #flot width="400px" height="200px"></canvas>
+                                        <!--<sa-flot-chart class="chart-large has-legend-unique" [data]="revenueData" [options]="revenueChartOptions"></sa-flot-chart>-->
+                                    </div>
+                                </div>
+                                <!-- end s2 tab pane -->
+                                <!-- end content -->
+                            </div>
+
+                        </div>
+                        <!-- end widget div -->
+                    </div>
+                    <!-- end widget -->
+                </div>
+            </article>
+        </div>
+
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+
+</div>

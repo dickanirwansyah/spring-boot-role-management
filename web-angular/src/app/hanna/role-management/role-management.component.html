@@ -1,0 +1,140 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['Role Management']" icon="tasks" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+    <div class="row">	
+        <div class="col-sm-12" align="right">
+            <button-save [disabled]="statusView" (onClick)="save($event)"> </button-save>
+            <!--<button type="submit" class="btn btn-primary" (click)="save()" *ngIf="statusView"> <i class="fa fa-save"></i> Save</button>-->
+        </div>
+    </div>
+    <br>
+
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <div class="col-sm-6">
+                <!-- NEW WIDGET START -->
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>Role Management</h2>
+                        </header>
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+                            <!-- end widget edit box -->
+
+                            <!-- widget content -->
+                            <div class="widget-body no-padding">
+
+                                <sa-datatable *ngIf="evtProses" statusToolbar="true" filter="true" tableClass="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="hasinput">
+                                                <input type="text" class="form-control" placeholder="Filter Login ID" />
+                                            </th>
+                                            <th class="hasinput">
+                                                <input type="text" class="form-control" placeholder="Filter Name User" />
+                                            </th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>Login ID</th>
+                                            <th>Name User</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let field of list">
+                                            <td>{{field.loginId}}</td>
+                                            <td>{{field.nameUser}}</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm" href="#myModal2" data-toggle="modal" (click)="view(field)">
+                                                    <i class="fa fa-eye"></i> View
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </sa-datatable>
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                    <!-- end widget -->
+
+                </article>
+                <!-- WIDGET END -->
+            </div>
+            <div class="col-sm-6">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-editbutton="false" *ngIf="statusView">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+                        <h2>Management Menu </h2>
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+
+                        <!-- widget content -->
+                        <div class="widget-body">
+
+                            <div class="tree smart-form">
+                                <ul>
+                                    <li *ngFor="let field of menu">
+                                        <span> 
+                                            <label class="checkbox inline-block">
+                                                <input type="checkbox" name="checkbox-inline" [checked]="cekStatus(field)" (click)="toggleMenu($event, field)"><i></i>{{field.menuName}}
+                                            </label> 
+                                        </span>
+                                        <ul *ngIf="field.visible">
+                                            <li *ngFor="let sub of field.sub">
+                                                <span> 
+                                                    <label class="checkbox inline-block">
+                                                        <input type="checkbox" name="checkbox-inline" [checked]="cekStatus(sub)" (click)="toggleMenuSub($event, sub)"><i></i>{{sub.menuName}}
+                                                    </label> 
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+                <!-- end widget -->
+            </div>
+        </div>
+
+        <!-- end row -->
+
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+
+</div>

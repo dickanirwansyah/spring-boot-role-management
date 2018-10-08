@@ -1,0 +1,141 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['Upload Corporate']" icon="tasks" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-sm-12">
+                <!-- new widget -->
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>Upload Corporate</h2>
+                    </header>
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox"></div>
+                        <div class="widget-body">
+                            <a class="btn btn-primary btn-sm" href="#myModal" data-toggle="modal">
+                                <i class="fa fa-list"></i> Upload File
+                            </a>
+                            <a class="btn btn-warning btn-sm" (click)="onClose()">
+                                <i class="fa fa-undo"></i> Refresh
+                            </a>
+                            <br>
+                            <br>
+                            <sa-datatable *ngIf="evtProses" statusToolbar="true" filter="true" tableClass="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width:1%"></th>
+                                        <th class="hasinput" >
+                                            <input type="text" class="form-control" placeholder="Filter Ref User Code" />
+                                        </th>
+                                        <th class="hasinput" >
+                                            <input type="text" class="form-control" placeholder="Filter NPWP" />
+                                        </th>
+                                        <th class="hasinput" >
+                                            <input type="text" class="form-control" placeholder="Filter Business Entity Name" />
+                                        </th>
+                                        <th class="hasinput" >
+                                            <input type="text" class="form-control" placeholder="Filter Corporate Date" />
+                                        </th>
+                                        <th class="hasinput" >
+                                            <input type="text" class="form-control" placeholder="Filter Place of Establishment" />
+                                        </th>
+                                        <th class="hasinput" >
+                                            <input type="text" class="form-control" placeholder="Filter Created Date" />
+                                        </th>
+                                        <th class="hasinput" >
+                                            <input type="text" class="form-control" placeholder="Filter Started Date">
+                                        </th>
+                                        <th class="hasinput" >
+                                            <input type="text" class="form-control" placeholder="Filter Finished Date" />
+                                        </th>
+                                        <th class="hasinput" >
+                                            <input type="text" class="form-control" placeholder="Filter Finished Status" />
+                                        </th>
+                                        <th class="hasinput" >
+                                            <input type="text" class="form-control" placeholder="User" />
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>No</td>
+                                        <th>Ref User Code</th>
+                                        <th>NPWP</th>
+                                        <th>Business Entity Name</th>
+                                        <th>Corporate Date</th>
+                                        <th>Place of Establishment</th>
+                                        <th>Created Date</th>
+                                        <th>Started Date</th>
+                                        <th>Finished Date</th>
+                                        <th>Status</th>
+                                        <th>User</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let field of list; let i = index">
+                                        <td>{{i + 1}}</td>
+                                        <td class="adress">{{field.refUserCode}}</td>
+                                        <td class="adress">{{field.npwp}}</td>
+                                        <td class="adress">{{field.debiturName}}</td>
+                                        <td>{{field.dateOfBirth | date: 'dd-MM-yyyy'}}</td>
+                                        <td class="adress">{{field.placeOfBirth}}</td>
+                                        <td>{{field.createDate | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
+                                        <td>{{field.startDate | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
+                                        <td>{{field.finishedDate | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
+                                        <td>{{cekStatus(field)}}</td>
+                                        <td>{{cekUser(field)}}</td>
+                                    </tr>
+                                </tbody>
+                            </sa-datatable>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!-- end widget grid -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+                    <h4 class="modal-title">
+                        Popup Upload File
+                    </h4>
+                </div>
+                <div class="modal-body no-padding">
+                    <form id="login-form" class="smart-form">
+                        <fieldset>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Upload File</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="input">
+										<input type="file" multiple class="btn btn-default" id="exampleInputFile1" (change)="fileEventMultiple($event)">
+									</label>
+                                    </div>
+                                </div>
+                            </section>
+                        </fieldset>
+                        <footer>
+                            <button-simpan (onClick)="save($event)"> </button-simpan>
+                            <!--<button type="submit" class="btn btn-primary" (click)="save()" data-dismiss="modal"> <i class="fa fa-save"></i> Save</button>-->
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onClose()"><i class="fa fa-times"></i> Tutup
+						</button>
+                        </footer>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>

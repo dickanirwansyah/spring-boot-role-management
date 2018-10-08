@@ -1,0 +1,162 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['Scheduler']" icon="tasks" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-sm-12">
+                <!-- new widget -->
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>Scheduler</h2>
+                    </header>
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox"></div>
+                        <div class="widget-body">
+                            <sa-datatable *ngIf="evtProses" order="true" statusToolbar="true" filter="true" tableClass="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width:1%"></th>
+                                        <th class="hasinput" style="width:12%">
+                                            <input type="text" class="form-control" placeholder="Filter Identity Number" />
+                                        </th>
+                                        <th class="hasinput" style="width:10%">
+                                            <input type="text" class="form-control" placeholder="Filter Debitur Name" />
+                                        </th>
+                                        <th class="hasinput" style="width:10%">
+                                            <input type="text" class="form-control" placeholder="Filter Place of Birth" />
+                                        </th>
+                                        <th class="hasinput" style="width:10%">
+                                            <input id="dateselect_filter" type="text" placeholder="Filter Date of Birth" class="form-control datepicker" data-dateformat="yy/mm/dd">
+                                        </th>
+                                        <th style="width:29%">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>No</td>
+                                        <th>Description</th>
+                                        <th>Job Name</th>
+                                        <th>Trigger Group</th>
+                                        <th>Trigger State</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let field of list; let i = index">
+                                        <td>{{i + 1}}</td>
+                                        <td>{{field.description}}</td>
+                                        <td>{{field.jobName}}</td>
+                                        <td>{{field.id.triggerGroup}}</td>
+                                        <td>{{field.triggerState}}</td>
+                                        <td>
+                                            <a *ngIf="field.triggerState == 'ACQUIRED' || field.triggerState == 'WAITING'" class="btn btn-danger btn-sm" (click)="stop(field)">
+                                                <i class="fa fa-ban"></i> Stop
+                                            </a>
+                                            <a *ngIf="field.triggerState == 'PAUSED'" class="btn btn-primary btn-sm" data-toggle="modal" (click)="start(field)">
+                                                <i class="fa fa-share"></i> Start
+                                            </a>
+                                            <a class="btn btn-success btn-sm" href="#myModal" data-toggle="modal" (click)="update(field)">
+                                                <i class="fa fa-pencil"></i> Update
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </sa-datatable>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!-- end widget grid -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+                    <h4 class="modal-title">
+                        Popup Create User Management
+                    </h4>
+                </div>
+                <div class="modal-body no-padding">
+                    <form id="login-form" class="smart-form">
+                        <fieldset>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-2">Min</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="select">
+										<select class="input-sm" (change)="onChangeMin($event)">
+                                            <option *ngFor="let n of listMin" [selected]="scheduler.min == n.KODE" [value]="n.KODE">{{n.DESKRIPSI}}</option>
+										</select> <i></i> </label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-2">Hour</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="select">
+										<select class="input-sm" (change)="onChangeHour($event)">
+                                            <option *ngFor="let n of listHour" [selected]="scheduler.hour == n.KODE" [value]="n.KODE">{{n.DESKRIPSI}}</option>
+										</select> <i></i> </label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-2">Day</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="select">
+										<select class="input-sm" (change)="onChangeDay($event)">
+                                            <option *ngFor="let n of listDay" [selected]="scheduler.day == n.KODE" [value]="n.KODE">{{n.DESKRIPSI}}</option>
+										</select> <i></i> </label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-2">Week</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="select">
+										<select class="input-sm" (change)="onChangeWeek($event)">
+                                            <option *ngFor="let n of listWeek" [selected]="scheduler.week == n.KODE" [value]="n.KODE">{{n.DESKRIPSI}}</option>
+										</select> <i></i> </label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-2">Month</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="select">
+										<select class="input-sm" (change)="onChangeMonth($event)">
+                                            <option *ngFor="let n of listMonth" [selected]="scheduler.month == n.KODE" [value]="n.KODE">{{n.DESKRIPSI}}</option>
+										</select> <i></i> </label>
+                                    </div>
+                                </div>
+                            </section>
+                        </fieldset>
+                        <footer>
+                            <button-simpan (onClick)="save($event)"> </button-simpan>
+                            <!--<button type="submit" class="btn btn-primary" (click)="save()" data-dismiss="modal"><i class="fa fa-save"></i> Save</button>-->
+                            <!--<button type="submit" class="btn btn-primary"> <i class="fa fa-share"></i> Update</button>-->
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onClose()"><i class="fa fa-times"></i> Close</button>
+                        </footer>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>

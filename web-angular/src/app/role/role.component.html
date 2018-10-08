@@ -1,0 +1,50 @@
+<sa-datatable statusToolbar="true" filter="true" tableClass="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th class="hasinput">
+                <input type="text" class="form-control" placeholder="Filter No BPS" />
+            </th>
+            <th class="hasinput icon-addon">
+                <input id="dateselect_filter" type="text" placeholder="Filter Tgl BPS" class="form-control datepicker" data-dateformat="yy/mm/dd">
+                <label for="dateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Date"></label>
+            </th>
+            <th class="hasinput">
+                <input type="text" class="form-control" placeholder="Filter Nama" />
+            </th>
+            <th class="hasinput">
+                <input type="text" class="form-control" placeholder="Filter NPWP" />
+            </th>
+            <th class="hasinput">
+                <input type="text" class="form-control" placeholder="Filter Jenis Permohonan" />
+            </th>
+            <th class="hasinput">
+                <input type="text" class="form-control" placeholder="Filter No SKP/Bukti Potong">
+            </th>
+            <th></th>
+        </tr>
+
+        <tr>
+            <th>No BPS</th>
+            <th>Tgl BPS</th>
+            <th>Nama Wajib Pajak</th>
+            <th>NPWP</th>
+            <th>Jenis Permohonan</th>
+            <th>No SKP/Bukti Potong</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let x of test">
+            <td>{{x.noBps}}</td>
+            <td>{{x.tglBps}}</td>
+            <td>{{x.namaWajibPajak}}</td>
+            <td>{{x.npwp}}</td>
+            <td>{{x.jenisPermohonan}}</td>
+            <td>{{x.noSkp}}</td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="#myModal2" data-toggle="modal"><i class="fa fa-pencil"></i> Ubah</a>
+                <a class="btn btn-primary" href="#myModalPenelitian" data-toggle="modal"><i class="fa fa-eye"></i> Submit</a>
+            </td>
+        </tr>
+    </tbody>
+</sa-datatable>

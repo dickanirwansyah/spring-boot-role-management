@@ -1,0 +1,133 @@
+<div id="content">
+	<div class="row">
+		<sa-big-breadcrumbs [items]="['Request']" icon="magic"
+			class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+	</div>
+
+	<div class="row">
+
+		<div class="col-sm-5">
+			<form role="form" class="form-horizontal"
+				(ngSubmit)="onSubmit(formRequest.value)" [formGroup]="formRequest">
+				<div class="form-group">
+					<label class="sr-only">Kode</label> <input type="text"
+						placeholder="No KTP" class="form-control" formControlName="ktp">
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Nama</label> <input type="text"
+						placeholder="Nama" class="form-control" required
+						formControlName="nama">
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Tempat, Tanggal Lahir</label> <input
+						type="text" placeholder="Tempat, Tanggal Lahir"
+						class="form-control" required formControlName="ttl">
+				</div>
+				<div class="row">
+					<div class="col-sm-5 m-b-xs">
+						<div class="form-group">
+							<select select2 style="width: 100%" class="genders"
+								[placeholder]="placeHolder.gender" [selectedval]="request.jk"
+								(change)="onChangeGender($event)">
+								<option *ngFor="let n of  genders" [value]="n.id">{{n.desc}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-5 m-b-xs">
+						<div class="form-group">
+							<select select2 style="width: 100%" class="bloods"
+								[placeholder]="placeHolder.blood" [selectedval]="request.blood"
+								(change)="onChangeBloods($event)">
+								<option *ngFor="let n of  bloods" [value]="n.id">{{n.desc}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="comment">Alamat</label>
+					<textarea class="form-control" rows="5" formControlName="alamat"></textarea>
+				</div>
+				<div class="form-group">
+					<select2 [prop]="countries" (onChange)="onChangeCountries($event)"></select2>
+				</div>
+				<div class="form-group">
+					<select2 [prop]="jobs" (onChange)="onChangeJob($event)"></select2>
+
+				</div>
+				<div class="form-group">
+					<select select2 style="width: 100%" class="religions"
+						[placeholder]="placeHolder.religion"
+						(change)="onChangeReligions($event)">
+						<option *ngFor="let n of  religions" [value]="n.id">{{n.desc}}</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<select select2 style="width: 100%" class="maritals"
+						[placeholder]="placeHolder.status"
+						(change)="onChangeMaritals($event)">
+						<option *ngFor="let n of  maritals" [value]="n.id">{{n.desc}}</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<select select2 style="width: 100%" class="citizens"
+						[placeholder]="placeHolder.citizen"
+						(change)="onChangeCitizens($event)">
+						<option *ngFor="let n of  citizens" [value]="n.id">{{n.desc}}</option>
+					</select>
+
+				</div>
+				<div class="row">
+					<div class="col-sm-5 m-b-xs">
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" name="mydate" placeholder="Select a date"
+									class="form-control datepicker" formControlName="expireDate"
+									(changeDate)="setTgl($event)"
+									[saUiDatepicker]="{
+                                           dateFormat: 'dd/mm/yy'
+                                           }">
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-5 m-b-xs">
+						<div class="form-group">
+							<div class="i-checks">
+								<label> <input type="checkbox" value="option2" name="a"
+									(change)="addProp1($event)"> <i></i> No Expire Date
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-3 m-b-xs">Signature</div>
+					<div class="col-sm-3 m-b-xs">
+						<label class="radio"> <input type="radio" name="signature"
+							checked="checked" value="1" formControlName="signature">
+							<i></i>Valid
+						</label>
+					</div>
+					<div class="col-sm-3 m-b-xs">
+						<div class="form-group">
+							<label class="radio"> <input type="radio"
+								name="signature" value="0" formControlName="signature">
+								<i></i>Not Valid
+							</label>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="form-group">
+					<button class="btn btn-success" type="submit">SUBMIT</button>
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+</div>

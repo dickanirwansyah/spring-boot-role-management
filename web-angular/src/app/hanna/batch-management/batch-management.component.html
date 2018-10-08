@@ -1,0 +1,206 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['Batch Management']" icon="tasks" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-sm-12">
+                <!-- new widget -->
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>Batch Management</h2>
+                    </header>
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox"></div>
+                        <div class="widget-body">
+                            <a class="btn btn-primary btn-sm" href="#myModal" data-toggle="modal">
+                                <i class="fa fa-plus-square"></i> Create Job
+                            </a>
+                            <a class="btn btn-warning btn-sm" href="javascript:void(0);">
+                                <i class="fa fa-undo"></i> Clear
+                            </a>
+                            <br>
+                            <br>
+                            <sa-datatable *ngIf="evtProses" statusToolbar="true" filter="true" tableClass="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width:1%"></th>
+                                        <th class="hasinput" style="width:15%">
+                                            <input type="text" class="form-control" placeholder="Filter Job Name" />
+                                        </th>
+                                        <th class="hasinput" style="width:10%">
+                                            <input type="text" class="form-control" placeholder="Filter Total Files" />
+                                        </th>
+                                        <th class="hasinput" style="width:15%">
+                                            <input id="dateselect_filter" type="text" placeholder="Filter Create Date" class="form-control datepicker" data-dateformat="yy/mm/dd">
+                                        </th>
+                                        <th class="hasinput" style="width:15%">
+                                            <input id="dateselect_filter" type="text" placeholder="Filter Started Date" class="form-control datepicker" data-dateformat="yy/mm/dd">
+                                        </th>
+                                        <th class="hasinput" style="width:15%">
+                                            <input id="dateselect_filter" type="text" placeholder="Filter Finished Date" class="form-control datepicker" data-dateformat="yy/mm/dd">
+                                        </th>
+                                        <th style="width:39%">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Job Name</th>
+                                        <th>Total Files</th>
+                                        <th>Created Date</th>
+                                        <th>Started Date</th>
+                                        <th>Finished Date</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let field of list">
+                                        <td>{{field.jobId}}</td>
+                                        <td>{{field.jobName}}</td>
+                                        <td>{{field.totalFile}}</td>
+                                        <td>{{field.createDate | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
+                                        <td>{{field.startDate | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
+                                        <td>{{field.finishedDate | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
+                                        <!--<td>{{field.status == '1' ? 'success' : 'failed'}}</td>-->
+                                        <td>
+                                            <a class="btn btn-primary btn-sm" href="#myModal2" data-toggle="modal" (click)="view(field)">
+                                                <i class="fa fa-eye"></i> View
+                                            </a>
+                                            <a class="btn btn-success btn-sm" href="#myModal" data-toggle="modal" (click)="update(field)">
+                                                <i class="fa fa-pencil"></i> Upload Files
+                                            </a>
+                                            <a class="btn btn-primary btn-sm" (click)="start(field)">
+                                                <i class="fa fa-share"></i> Start Job
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </sa-datatable>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!-- end widget grid -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+                    <h4 class="modal-title">
+                        Popup Job Management
+                    </h4>
+                </div>
+                <div class="modal-body no-padding">
+                    <form id="login-form" class="smart-form">
+                        <fieldset>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Job Name</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="input">
+                                            <input type="text" class="form-control" [(ngModel)]="job.jobName" [ngModelOptions]="{standalone: true}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section *ngIf="statusUpload">
+                                <div class="row">
+                                    <label class="label col col-3">Upload File</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="input">
+										<input type="file" multiple class="btn btn-default" id="exampleInputFile1" (change)="fileEventMultiple($event)">
+									</label>
+                                    </div>
+                                </div>
+                            </section>
+                        </fieldset>
+                        <footer>
+                            <button-simpan (onClick)="save($event)"> </button-simpan>
+                            <!--<button type="submit" class="btn btn-primary" (click)="save()" data-dismiss="modal"> <i class="fa fa-save"></i> Save</button>-->
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onClose()"><i class="fa fa-times"></i> Close</button>
+                        </footer>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+                    <h4 class="modal-title">
+                        Popup Upload File
+                    </h4>
+                </div>
+                <div class="modal-body no-padding">
+                    <form id="login-form" class="smart-form">
+                        <fieldset>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Job Name</label>
+                                    <label class="label col col-3">: {{job.jobName}}</label>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <div class="col col-10">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name File </th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let field of listDetail">
+                                                    <th>{{field.fileName}}</th>
+                                                    <th>{{field.status == '1' ? 'success' : ''}}</th>
+                                                    <th>
+                                                        <a class="btn btn-primary btn-sm" (click)="download(field)">
+                                                            <i class="fa fa-share"></i> Download file
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </section>
+                        </fieldset>
+                        <footer>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="downloadAll()">
+                                <i class="fa fa-share"></i> 
+                                Download All
+                            </button>
+                            <!--<button type="submit" class="btn btn-primary" (click)="save()" data-dismiss="modal"> <i class="fa fa-save"></i> Save</button>-->
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onClose()"><i class="fa fa-times"></i> Close</button>
+                        </footer>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>

@@ -1,0 +1,36 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['Task List']" icon="tasks" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+    <div class="ibox-content">
+
+        <div class="widget-body no-padding">
+
+            <sa-datatable [options]="{
+                  ajax:'http://localhost:8099/spring-service/sample/list-sample',
+                columns: [
+                {data: 'id'},
+                {data: 'nama'},
+                {data: 'alamat'}
+                ],
+                
+                
+                buttons: [
+                'copy', 'excel', 'pdf', 'print'
+                ]
+                }" [paginationLength]=true tableClass="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAMA</th>
+                        <th>ALAMAT</th>
+                    </tr>
+                </thead>
+            </sa-datatable>
+
+        </div>
+
+    </div>
+
+
+</div>

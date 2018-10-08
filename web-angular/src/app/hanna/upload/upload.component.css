@@ -1,0 +1,15 @@
+.tableStyle{
+    table-layout:fixed;
+    margin: 0 auto; 
+    width: 150px;
+}
+
+.adress {
+  max-width : 100px; 
+  white-space : nowrap;
+  overflow : hidden;
+}
+
+/*.adress:hover {
+  max-width : initial; 
+}*/

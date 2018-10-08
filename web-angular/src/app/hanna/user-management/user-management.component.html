@@ -1,0 +1,251 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['User Management']" icon="tasks" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-sm-12">
+                <!-- new widget -->
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>User Management</h2>
+                    </header>
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox"></div>
+                        <div class="widget-body">
+                            <a class="btn btn-primary btn-sm" href="#myModal" data-toggle="modal">
+                                <i class="fa fa-plus-square"></i> Create
+                            </a>
+                            <a class="btn btn-warning btn-sm" href="javascript:void(0);">
+                                <i class="fa fa-undo"></i> Clear
+                            </a>
+                            <br>
+                            <br>
+                            <sa-datatable *ngIf="evtProses" statusToolbar="true" filter="true" tableClass="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="hasinput" style="width:15%">
+                                            <input type="text" class="form-control" placeholder="Filter Login ID" />
+                                        </th>
+                                        <th class="hasinput" style="width:15%">
+                                            <input type="text" class="form-control" placeholder="Filter Name User" />
+                                        </th>
+                                        <th class="hasinput" style="width:15%">
+                                            <input type="text" class="form-control" placeholder="Filter Role" />
+                                        </th>
+                                        <th class="hasinput" style="width:15%">
+                                            <input type="text" class="form-control" placeholder="Filter Telephone" />
+                                        </th>
+                                        <th class="hasinput" style="width:15%">
+                                            <input type="text" class="form-control" placeholder="Filter NIP" />
+                                        </th>
+                                        <th style="width:30%">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>Login ID</th>
+                                        <th>Name User</th>
+                                        <th>Role</th>
+                                        <th>Telephone</th>
+                                        <th>NIP</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let field of list">
+                                        <td>{{field.loginId}}</td>
+                                        <td>{{field.nameUser}}</td>
+                                        <td>{{field.positionId}}</td>
+                                        <td>{{field.telephone}}</td>
+                                        <td>{{field.nip}}</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm" href="#myModal2" data-toggle="modal" (click)="view(field)">
+                                                <i class="fa fa-eye"></i> View
+                                            </a>
+                                            <a class="btn btn-success btn-sm" href="#myModal" data-toggle="modal" (click)="update(field)">
+                                                <i class="fa fa-pencil"></i> Update
+                                            </a>
+                                            <!--<a id="smart-mod-eg1" class="btn btn-warning btn-sm" (click)="delete(field)">
+                                                <i class="fa fa-trash-o"></i> Delete
+                                            </a>-->
+                                            <button-delete (onClick)="delete($event, field)"> </button-delete>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </sa-datatable>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!-- end widget grid -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+                    <h4 class="modal-title">
+                        Popup Create User Management
+                    </h4>
+                </div>
+                <div class="modal-body no-padding">
+                    <form id="login-form" class="smart-form">
+                        <fieldset>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Login ID</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="input">
+										<input type="text" class="form-control" [(ngModel)]="userManagement.loginId" [ngModelOptions]="{standalone: true}">
+									</label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Name User</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="input">
+										<input type="text" class="form-control" [(ngModel)]="userManagement.nameUser" [ngModelOptions]="{standalone: true}">
+									</label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Role</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="select">
+										<select class="input-sm" (change)="onChange($event)">
+											<option value="00">Choose Role</option>
+											<option value="01" [selected]="userManagement?.positionId == 01">Admin</option>
+											<option value="02" [selected]="userManagement?.positionId == 02">Petugas Pelaporan</option>
+											<!--<option value="03" [selected]="userManagement?.positionId == 03">Business Analsyt</option>
+											<option value="04" [selected]="userManagement?.positionId == 04">Quality Control</option>-->
+										</select> <i></i> </label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Telephone</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="input">
+										<input type="text" class="form-control" [(ngModel)]="userManagement.telephone" [ngModelOptions]="{standalone: true}">
+									</label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">NIP</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="input">
+										<input type="text" class="form-control" [(ngModel)]="userManagement.nip" [ngModelOptions]="{standalone: true}">
+									</label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Password</label>
+                                    <div class="col col-3 input-group">
+                                        <label class="input">
+										<input type="password" class="form-control" [(ngModel)]="userManagement.password" [ngModelOptions]="{standalone: true}">
+									</label>
+                                    </div>
+                                </div>
+                            </section>
+                        </fieldset>
+                        <footer>
+                            <button-simpan (onClick)="save($event)"> </button-simpan>
+                            <!--<button type="submit" class="btn btn-primary" (click)="save()" data-dismiss="modal"><i class="fa fa-save"></i> Save</button>-->
+                            <!--<button type="submit" class="btn btn-primary"> <i class="fa fa-share"></i> Update</button>-->
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onClose()"><i class="fa fa-times"></i> Close</button>
+                        </footer>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+                    <h4 class="modal-title">
+                        Popup View User Management
+                    </h4>
+                </div>
+                <div class="modal-body no-padding">
+                    <form id="login-form-view" class="smart-form">
+                        <fieldset>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Login ID</label>
+                                    <label class="label col col-3">: {{userManagement.loginId}}</label>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Name User</label>
+                                    <label class="label col col-3">: {{userManagement.nameUser}}</label>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Position</label>
+                                    <label class="label col col-3">: {{userManagement.positionName}}</label>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">Telephone</label>
+                                    <label class="label col col-3">: {{userManagement.telephone}}</label>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <label class="label col col-3">NIP</label>
+                                    <label class="label col col-3">: {{userManagement.nip}}</label>
+                                </div>
+                            </section>
+                            <!--<section>
+                                <div class="row">
+                                    <label class="label col col-3">Password</label>
+                                    <label class="label col col-3">: {{userManagement.password}}</label>
+                                </div>
+                            </section>-->
+                        </fieldset>
+                        <footer>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+							<i class="fa fa-times"></i> 
+							Close
+						</button>
+                        </footer>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+</div>

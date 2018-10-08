@@ -1,0 +1,62 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['Task List']" icon="tasks" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+    <div class="ibox-content">
+
+
+        <div class="row">
+            <div class="col-sm-5 m-b-xs">
+                <div class="form-group">
+                    <select select2 style="width:100%" class="select2" (change)="pilihUser($event)">
+                        
+                            <option value="UserA">User A</option>
+                            <option value="UserB">User B</option>
+                            <option value="UserC">User C</option>
+                            <option value="UserD">User D</option>
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-5 m-b-xs">
+                <div class="form-group">
+
+                </div>
+            </div>
+        </div>
+        <div class="widget-body no-padding">
+
+            <sa-datatable [options]="{
+                  ajax:'http://localhost:8099/sample/list-sample',
+                columns: [
+                {data: 'id'},
+                {data: 'subject'},
+                {data: 'priority'},
+                {data: 'dueDate'},
+                {data: 'status'},
+                {data: 'acction'}
+                ],
+                
+                
+                buttons: [
+                'copy', 'excel', 'pdf', 'print'
+                ]
+                }" [paginationLength]=true tableClass="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>SUBJECT</th>
+                        <th>PRIORITY</th>
+                        <th>DUE DATE</th>
+                        <th>STATUS</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+            </sa-datatable>
+
+        </div>
+
+    </div>
+
+
+</div>
